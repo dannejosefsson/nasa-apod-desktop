@@ -92,7 +92,7 @@ import re
 import os
 import random
 import glob
-from PIL import Image
+from PIL import Image, ImageOps
 from sys import stdout
 from sys import exit
 from lxml import etree
@@ -240,7 +240,7 @@ def resize_image(filename):
     else: 
         if SHOW_DEBUG:
             print "Resizing the image from", image.size[0], "x", image.size[1], "to", RESOLUTION_X, "x", RESOLUTION_Y
-        image = image.resize((RESOLUTION_X, RESOLUTION_Y), Image.ANTIALIAS)
+        image = ImageOps.fit(image, (RESOLUTION_X, RESOLUTION_Y), Image.ANTIALIAS, 0, (0.5, 0.5))
 
         if SHOW_DEBUG:
             print "Saving the image to", filename
